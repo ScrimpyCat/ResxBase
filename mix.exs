@@ -21,6 +21,7 @@ defmodule ResxBase.MixProject do
     defp deps do
         [
             { :resx, "~> 0.1.0" },
+            { :itsy, "~> 0.0" }
             # { :callback, "~> 0.1.0" },
             # { :jaxon, "~> 1.0" },
             # { :poison, "~> 4.0" },
