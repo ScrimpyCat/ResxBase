@@ -1,4 +1,38 @@
 defmodule ResxBase.Decoder do
+    @moduledoc """
+      Decode data resources from a RFC 4648 encoding.
+
+      ### Decoding
+
+      The type of decoding is specified by using the `:encoding` option.
+
+        Resx.Resource.transform(resource, ResxBase.Decoder, encoding: :base64)
+
+      The list of available decoding formats to choose from are:
+
+      * `:base16` - By default this works the same as `Base.decode16/1`.
+      Optionally the case can be specified using the `:case` option, this can
+      be either `:lower` (for lowercase input) or `:upper` (for uppercase input)
+      or `:mixed` (for case-insensitive input).
+      * `:base32` - By default this works the same as `Base.encode32/1`.
+      * `:base64` - By default this works the same as `Base.encode64/1`.
+      * `:hex32` - By default this works the same as `Base.hex_encode32/1`.
+      * `:url64` - By default this works the same as `Base.url_encode64/1`.
+
+      All decodings also take the configuration options specified in `ResxBase`.
+
+      ### Streams
+
+      Streamed data is expected to be made up of individual complete encoding
+      sequences. Where each encoding is decoded as-is in the stream.
+      are encoded by forming a complete sequence and separating each
+      encoded sequence with the necessary amount of padding characters.
+
+      e.g. If you had the encoded data `"aGVsbG8=IA==d29ybGQ="` this would be
+      decoded to: `"hello world"`. However if it was a stream consisting of
+      `["aGVsbG8=", "IA==", "d29ybGQ="]`, it would be decoded as:
+      `["hello", " ", "world"]`.
+    """
     use Resx.Transformer
 
     alias Resx.Resource.Content
