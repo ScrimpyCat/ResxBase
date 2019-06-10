@@ -22,7 +22,9 @@ defmodule ResxBase.MixProject do
         [
             { :resx, "~> 0.1.0" },
             { :itsy, "~> 0.0" },
-            { :callback, "~> 0.1.0" }
+            { :ex_doc, "~> 0.18", only: :dev, runtime: false },
+            { :simple_markdown, "~> 0.5.4", only: :dev, runtime: false },
+            { :ex_doc_simple_markdown, "~> 0.3", only: :dev, runtime: false }
         ]
     end
 
