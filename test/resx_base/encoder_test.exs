@@ -25,6 +25,9 @@ defmodule ResxBase.EncoderTest do
             assert Base.encode16(resource.content.data, case: :upper) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base16, case: :upper) |> Resx.Resource.finalise!).content.data
             assert Base.encode16(resource.content.data, case: :lower) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base16, case: :lower) |> Resx.Resource.finalise!).content.data
 
+            resource = %{ resource | content: %{ Resx.Resource.Content.Stream.new(resource.content) | data: ["f", "oo"] } }
+            assert Base.encode16(Enum.at(resource.content.data, 0)) <> Base.encode16(Enum.at(resource.content.data, 1)) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base16) |> Resx.Resource.finalise!).content.data
+
             { :ok, resource } = Resx.Producers.Data.new(<<0>>)
             assert "00" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base16) |> Resx.Resource.finalise!).content.data
             assert "00" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base16, pad_chr: "*") |> Resx.Resource.finalise!).content.data
@@ -47,6 +50,9 @@ defmodule ResxBase.EncoderTest do
 
             resource = Resx.Resource.open!("data:,f")
             assert Base.encode32(resource.content.data) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base32) |> Resx.Resource.finalise!).content.data
+
+            resource = %{ resource | content: %{ Resx.Resource.Content.Stream.new(resource.content) | data: ["f", "oo"] } }
+            assert Base.encode32(Enum.at(resource.content.data, 0)) <> Base.encode32(Enum.at(resource.content.data, 1)) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base32) |> Resx.Resource.finalise!).content.data
 
             { :ok, resource } = Resx.Producers.Data.new(<<0>>)
             assert "AA======" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base32) |> Resx.Resource.finalise!).content.data
@@ -71,6 +77,9 @@ defmodule ResxBase.EncoderTest do
             resource = Resx.Resource.open!("data:,f")
             assert Base.encode64(resource.content.data) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base64) |> Resx.Resource.finalise!).content.data
 
+            resource = %{ resource | content: %{ Resx.Resource.Content.Stream.new(resource.content) | data: ["f", "oo"] } }
+            assert Base.encode64(Enum.at(resource.content.data, 0)) <> Base.encode64(Enum.at(resource.content.data, 1)) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base64) |> Resx.Resource.finalise!).content.data
+
             { :ok, resource } = Resx.Producers.Data.new(<<0>>)
             assert "AA==" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base64) |> Resx.Resource.finalise!).content.data
             assert "AA**" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :base64, pad_chr: "*") |> Resx.Resource.finalise!).content.data
@@ -94,6 +103,9 @@ defmodule ResxBase.EncoderTest do
             resource = Resx.Resource.open!("data:,f")
             assert Base.hex_encode32(resource.content.data) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :hex32) |> Resx.Resource.finalise!).content.data
 
+            resource = %{ resource | content: %{ Resx.Resource.Content.Stream.new(resource.content) | data: ["f", "oo"] } }
+            assert Base.hex_encode32(Enum.at(resource.content.data, 0)) <> Base.hex_encode32(Enum.at(resource.content.data, 1)) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :hex32) |> Resx.Resource.finalise!).content.data
+
             { :ok, resource } = Resx.Producers.Data.new(<<0>>)
             assert "00======" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :hex32) |> Resx.Resource.finalise!).content.data
             assert "00******" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :hex32, pad_chr: "*") |> Resx.Resource.finalise!).content.data
@@ -116,6 +128,9 @@ defmodule ResxBase.EncoderTest do
 
             resource = Resx.Resource.open!("data:,f")
             assert Base.url_encode64(resource.content.data) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :url64) |> Resx.Resource.finalise!).content.data
+
+            resource = %{ resource | content: %{ Resx.Resource.Content.Stream.new(resource.content) | data: ["f", "oo"] } }
+            assert Base.url_encode64(Enum.at(resource.content.data, 0)) <> Base.url_encode64(Enum.at(resource.content.data, 1)) == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :url64) |> Resx.Resource.finalise!).content.data
 
             { :ok, resource } = Resx.Producers.Data.new(<<0>>)
             assert "AA==" == (Resx.Resource.transform!(resource, ResxBase.Encoder, encoding: :url64) |> Resx.Resource.finalise!).content.data
