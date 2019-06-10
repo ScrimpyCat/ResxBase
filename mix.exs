@@ -21,14 +21,8 @@ defmodule ResxBase.MixProject do
     defp deps do
         [
             { :resx, "~> 0.1.0" },
-            { :itsy, "~> 0.0" }
-            # { :callback, "~> 0.1.0" },
-            # { :jaxon, "~> 1.0" },
-            # { :poison, "~> 4.0" },
-            # { :ex_doc, "~> 0.18", only: :dev, runtime: false },
-            # { :simple_markdown, "~> 0.5.4", only: :dev, runtime: false },
-            # { :simple_markdown_extension_highlight_js, "~> 0.1.0", only: :dev, runtime: false },
-            # { :ex_doc_simple_markdown, "~> 0.3", only: :dev, runtime: false }
+            { :itsy, "~> 0.0" },
+            { :callback, "~> 0.1.0" }
         ]
     end
 
