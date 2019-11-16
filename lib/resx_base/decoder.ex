@@ -25,8 +25,6 @@ defmodule ResxBase.Decoder do
 
       Streamed data is expected to be made up of individual complete encoding
       sequences. Where each encoding is decoded as-is in the stream.
-      are encoded by forming a complete sequence and separating each
-      encoded sequence with the necessary amount of padding characters.
 
       e.g. If you had the encoded data `"aGVsbG8=IA==d29ybGQ="` this would be
       decoded to: `"hello world"`. However if it was a stream consisting of
